@@ -1,0 +1,17 @@
+services:
+  relaypulse:
+    build: .
+    container_name: relaypulse_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - DATABASE_PATH=/app/data/relaypulse.db
+      - LOG_LEVEL=info
+      # - OPENAI_API_KEY=your_key_here
+    volumes:
+      # Persistent volume ensures your SQLite database survives container restarts
+      - ./data:/app/data
+
